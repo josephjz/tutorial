@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include 
+from tutorial import views
 
 urlpatterns = [
+    path('',views.login_redirect, name = 'login_redirect'),  # so that first page takes you to login  OOOO THIS IS SWEET 
     path('admin/', admin.site.urls),
     path('account/', include('accounts.urls')), # tells code to "include" the accounts.urls.py file in the accounts app of this project 
                                                 # note that we are currently in the wider tutorial project 
