@@ -20,9 +20,14 @@
             <h1> Welcome! </h1> You can login here. 
             <button class = "btn btn-danger" type = "button" name = "button"> Login </button>
         </div>
-
-        <div class = "jumbotron"> 
-            <h1> Nice! </h1>
-        </div>
+        <h1>{{name}}</h1> 
+        <!-- what the line above does: takes the value from the view that we pass through and present it in the HTML template -->
+        <ul>
+            <!-- ul for list, and then below is a for loop in the templating logic -->
+            {% for number in numbers %}
+            <li>{{number}}</li>
+            <!-- also need to end the for loop -->
+            {% endfor %}
+        </ul>
     </body>
 </html>

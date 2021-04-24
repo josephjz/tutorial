@@ -8,4 +8,19 @@ def home(request):  # django function based view
                                         # this happeens when they load the url 
 
     # video 3: 
-    return render(request, 'accounts/login.html') # now django will look into templates folder for HTMl
+    # return render(request, 'accounts/login.html') # now django will look into templates folder for HTMl
+
+    # video 6:
+    # in the views, we pass data from views to our template, so this is where the logic is 
+    # this is where we write our data base queries 
+    numbers = [1,2,3,4,5]
+    name = 'Jennifer Joseph'
+
+    # we pass the data with the render function, with the dictionary object parameter
+    args = {
+        'name' : name,  #key name, we call it whatever we want, this is how we refer to this data in the HTML template itself 
+        'numbers': numbers,
+    }
+
+    return render(request, 'accounts/login.html',args) 
+
