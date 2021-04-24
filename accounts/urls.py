@@ -11,7 +11,6 @@ urlpatterns = [
                                 # third param specifies which template to render since we don't have this info from the views._ function
                                 # key template name tells that the value should be rendered instead of the default 
     path("login/", LoginView.as_view(template_name='accounts/login.html')), # lots of depreciated code from the tutorial 
-    path("logout/", LogoutView.as_view(template_name='accounts/logout.html')) # lots of depreciated code from the tutorial 
-
-
+    path("logout/", LogoutView.as_view(template_name='accounts/logout.html')), # lots of depreciated code from the tutorial 
+    path("register/", views.register, name = "register"),
 ]

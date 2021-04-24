@@ -11,7 +11,7 @@ class UserProfile(models.Model):    # inherits tons of properties and methods fr
     user = models.OneToOneField(User,on_delete = models.CASCADE) # link to user model that is built into django 
     # now we add our own things 
 
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     password = models.CharField(max_length=50, default = '')
     #passwordsecond = models.CharField(max_length=50,error_messages={'required': 'Please enter the same password'})#, blank=False)
     first_name = models.CharField(max_length=50, default = '')

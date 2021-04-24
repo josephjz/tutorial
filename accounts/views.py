@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
@@ -6,7 +7,6 @@ def home(request):  # django function based view
     # from video 2: return HttpResponse('Home page!')   # when the user goes to the url connected to the home() function (this is a view), (look at the urls)
                                         # and you will see the path defined as views.home, respond immediately with this return 
                                         # this happeens when they load the url 
-
     # video 3: 
     # return render(request, 'accounts/login.html') # now django will look into templates folder for HTMl
 
@@ -23,4 +23,24 @@ def home(request):  # django function based view
     }
 
     return render(request, 'accounts/home.html',args) 
+
+def register(request):  # video 15 
+
+    if request.method == 'POST': # if user has filled out form 
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save() #creates user in db
+            return redirect('/account')     # this does not handle invalid forms
+    
+    else:   # first time it is loaded 
+        form = UserCreationForm()
+    
+        # pass the form through to the templates 
+        args = {'form': form}
+
+    return render(request, 'accounts/reg_form.html', args)
+
+
+
+
 
