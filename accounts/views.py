@@ -3,6 +3,7 @@ from django.shortcuts import render, HttpResponse, redirect
 # now that we have our own form, we comment out above line and instead import our form 
 from accounts.forms import RegistrationForm
 
+from django.contrib.auth.models import User 
 
 # Create your views here.
 
@@ -44,6 +45,16 @@ def register(request):  # video 15
         args = {'form': form}
 
     return render(request, 'accounts/reg_form.html', args)
+
+
+def profile(request):
+    # define dictionary that we are going to pass through to this view 
+    # key is what we refer to in the template, value is actual data 
+    args = {'user': request.user}   # whole user object
+    return render(request, 'accounts/profile.html', args)
+
+
+
 
 
 
