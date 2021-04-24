@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save # signals allow you to execute code based on what is happening in db
+
 
 # REMEMBER, everytime you change this models.py file you must makemigrations and migrate to get changes to the database 
 
@@ -40,5 +42,12 @@ class UserProfile(models.Model):    # inherits tons of properties and methods fr
     location = models.BooleanField(default=1)
     # is_staff = models.BooleanField(default=False)
     # is_active = models.BooleanField(default=False)
+
+
+def create_profile(sender, **kwargs): 
+    if kwargs['created']:        # read as if this user object has been created, then create user profile
+        user_profile = UserProfile.objects.create(user=kwargs['instance']) # 
+
+post_save.connect(create_profile, sender = User) # post_save 
 
 
