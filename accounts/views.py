@@ -2,10 +2,10 @@ from django.shortcuts import render, HttpResponse, redirect
 #from django.contrib.auth.forms import UserCreationForm
 # now that we have our own form, we comment out above line and instead import our form 
 from accounts.forms import RegistrationForm
-
 from django.contrib.auth.models import User 
 
-# Create your views here.
+# use default form to be able to edit the user model 
+from django.contrib.auth.forms import UserChangeForm 
 
 def home(request):  # django function based view 
     # from video 2: return HttpResponse('Home page!')   # when the user goes to the url connected to the home() function (this is a view), (look at the urls)
@@ -47,14 +47,26 @@ def register(request):  # video 15
     return render(request, 'accounts/reg_form.html', args)
 
 
-def profile(request):
+def view_profile(request):
     # define dictionary that we are going to pass through to this view 
     # key is what we refer to in the template, value is actual data 
     args = {'user': request.user}   # whole user object
     return render(request, 'accounts/profile.html', args)
 
+def edit_profile(request):
+    # two different scenarios to account for here 
+    # 1. get request to page to get page initially from server
+    # 2. already has information, user has filled in info with the form to submit, and then they hit the submit button and post that data back to the webserver 
+    if request.method == "POST":
+        form = UserChangeForm(request.POST, instance = request.user) # knows what data the user has entered; also pass in instance param specifies the user object 
+        if form.is_valid():
+            form.save()
+            return redirect('/account/profile') # to see the updated information 
 
-
+    else:   #accounting for the get scenario, which initializses blank form 
+        form = UserChangeForm(instance = request.user)
+        args = {'form': form} # data to return 
+        return render(request, 'accounts/edit_profile.html', args)
 
 
 

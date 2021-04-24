@@ -13,5 +13,7 @@ urlpatterns = [
     path("login/", LoginView.as_view(template_name='accounts/login.html')), # lots of depreciated code from the tutorial 
     path("logout/", LogoutView.as_view(template_name='accounts/logout.html')), # lots of depreciated code from the tutorial 
     path("register/", views.register, name = "register"),
-    path("profile/", views.profile, name = "profile"),  # page will show user information without being able to edit it 
+    path("profile/", views.view_profile, name = "view_profile"),  # page will show user information without being able to edit it 
+    path("profile/edit/", views.edit_profile, name = "edit_profile"),  # now we are going to edit it 
+
 ]
