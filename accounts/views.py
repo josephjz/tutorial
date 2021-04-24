@@ -1,5 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
-from django.contrib.auth.forms import UserCreationForm
+#from django.contrib.auth.forms import UserCreationForm
+# now that we have our own form, we comment out above line and instead import our form 
+from accounts.forms import RegistrationForm
+
 
 # Create your views here.
 
@@ -27,13 +30,15 @@ def home(request):  # django function based view
 def register(request):  # video 15 
 
     if request.method == 'POST': # if user has filled out form 
-        form = UserCreationForm(request.POST)
+        #form = UserCreationForm(request.POST)
+        # now using our form 
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save() #creates user in db
             return redirect('/account')     # this does not handle invalid forms
     
     else:   # first time it is loaded 
-        form = UserCreationForm()
+        form = RegistrationForm()
     
         # pass the form through to the templates 
         args = {'form': form}
