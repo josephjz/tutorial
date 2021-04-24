@@ -1,3 +1,23 @@
 {% extends 'base.html' %}
+<!-- anything between block head and endblock will overwrite whatever is in the base html block head -->
 
 <h1>Home Page</h1>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    {% block head %}    
+    <title>Home</title> <!-- this overrides the base.html title of document for this page -->
+    {% endblock %}
+    
+</head>
+<body>
+
+    {% block body %}    <!-- this adds to the body block rather than replace -->
+    <h1>Home</h1>
+    {% endblock %}
+    
+</body>
+</html>
+
